@@ -19,8 +19,12 @@ namespace G4TEWS4_MVC.Models
 
         public double? ItineraryNo { get; set; }
         [DataType(DataType.Date), DisplayName("Trip Start")]
+
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? TripStart { get; set; }
         [DataType(DataType.Date), DisplayName("Trip End")]
+
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? TripEnd { get; set; }
         public string Description { get; set; }
         public string Destination { get; set; }

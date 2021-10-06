@@ -17,12 +17,17 @@ namespace G4TEWS4_MVC.Models
     {
         public int BookingId { get; set; }
 
+
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date), DisplayName("Booking Date")]
         public DateTime? BookingDate { get; set; }
 
+
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date), DisplayName("Trip Start Date")]
         public DateTime? PkgStartDate { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date), DisplayName("Trip End Date")]
         public DateTime? PkgEndDate { get; set; }
 
