@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G4TEWS4_Data", "G4TEWS4_Data\G4TEWS4_Data.csproj", "{CBA35ED3-446A-4EB4-BBEC-6E2A28E2AE47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G4TEWS4_MVC", "G4TEWS4_MVC\G4TEWS4_MVC.csproj", "{5096B45F-D05F-44D5-827E-A4778925AF89}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CBA35ED3-446A-4EB4-BBEC-6E2A28E2AE47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBA35ED3-446A-4EB4-BBEC-6E2A28E2AE47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBA35ED3-446A-4EB4-BBEC-6E2A28E2AE47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBA35ED3-446A-4EB4-BBEC-6E2A28E2AE47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5096B45F-D05F-44D5-827E-A4778925AF89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5096B45F-D05F-44D5-827E-A4778925AF89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5096B45F-D05F-44D5-827E-A4778925AF89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5096B45F-D05F-44D5-827E-A4778925AF89}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2DEF5F70-89B0-4E50-BDED-C5C3D818D765}
+	EndGlobalSection
+EndGlobal
