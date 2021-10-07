@@ -217,11 +217,15 @@ namespace G4TEWS4_MVC.Controllers
         // POST: Customers/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /*
+         * Took out model binding as it was preventing the ModelState to be Not Valid
+         */
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CustomerId,CustFirstName,CustLastName,CustAddress,CustCity,CustProv,CustPostal,CustCountry,CustHomePhone,CustBusPhone,CustEmail,AgentId,Username,Password")] Customer customers)
+        public ActionResult Edit(int id, Customer cust)
+        //public async Task<IActionResult> Edit(int id, [Bind("CustomerId,CustFirstName,CustLastName,CustAddress,CustCity,CustProv,CustPostal,CustCountry,CustHomePhone,CustBusPhone,CustEmail,AgentId,Username,Password")] Customer cust)
         {
-            if (id != customers.CustomerId)
+            if (id != cust.CustomerId)
             {
                 return NotFound();
             }
@@ -230,12 +234,29 @@ namespace G4TEWS4_MVC.Controllers
             {
                 try
                 {
-                    _context.Update(customers);
-                    await _context.SaveChangesAsync();
+                    Customer oldCustomer = new Customer();
+                    oldCustomer = _context.Customers.Find(id);
+                    oldCustomer.AgentId = cust.AgentId;
+                    oldCustomer.CustAddress = cust.CustAddress;
+                    oldCustomer.CustBusPhone = cust.CustBusPhone;
+                    oldCustomer.CustCity = cust.CustCity;
+                    oldCustomer.CustCountry = cust.CustCountry;
+                    oldCustomer.CustEmail = cust.CustEmail;
+                    oldCustomer.CustHomePhone = cust.CustHomePhone;
+                    oldCustomer.CustFirstName = cust.CustFirstName;
+                    oldCustomer.CustLastName = cust.CustLastName;
+                    oldCustomer.CustomersRewards = cust.CustomersRewards;
+                    oldCustomer.CustPassword = cust.CustPassword;
+                    oldCustomer.CustPostal = cust.CustPostal;
+                    oldCustomer.CustProv = cust.CustProv;
+                    oldCustomer.CustUserName = cust.CustUserName;
+                    _context.SaveChanges();
+                    //_context.Update(cust);
+                    //await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CustomersExists(customers.CustomerId))
+                    if (!CustomersExists(cust.CustomerId))
                     {
                         return NotFound();
                     }
@@ -246,8 +267,8 @@ namespace G4TEWS4_MVC.Controllers
                 }
                 return RedirectToAction(nameof(Profile));
             }
-            ViewData["AgentId"] = new SelectList(_context.Agents, "AgentId", "AgentId", customers.AgentId);
-            return View(customers);
+            ViewData["AgentId"] = new SelectList(_context.Agents, "AgentId", "AgentId", cust.AgentId);
+            return View(cust);
         }
 
 

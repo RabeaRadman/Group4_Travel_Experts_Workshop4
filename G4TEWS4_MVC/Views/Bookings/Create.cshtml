@@ -17,11 +17,11 @@
                 <input asp-for="BookingDate" class="form-control" />
                 <span asp-validation-for="BookingDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="BookingNo" class="control-label"></label>
-                <input asp-for="BookingNo" class="form-control" />
-                <span asp-validation-for="BookingNo" class="text-danger"></span>
-            </div>
+            @*<div class="form-group">
+            <label asp-for="BookingNo" class="control-label"></label>
+            <input asp-for="BookingNo" class="form-control" />
+            <span asp-validation-for="BookingNo" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
                 <label asp-for="TravelerCount" class="control-label"></label>
                 <input asp-for="TravelerCount" class="form-control" />
@@ -29,12 +29,28 @@
             </div>
             <div class="form-group">
                 <label asp-for="CustomerId" class="control-label"></label>
-                <select asp-for="CustomerId" class ="form-control" asp-items="ViewBag.CustomerId"></select>
+                <select asp-for="CustomerId" class="form-control">
+                    @foreach (G4TEWS4_Data.Customer c in ViewBag.Customers)
+                    {
+                       <option value="@c.CustomerId">@c.CustUserName</option>
+                    }
+                </select>
             </div>
-            <div class="form-group">
-                <label asp-for="TripTypeId" class="control-label"></label>
-                <select asp-for="TripTypeId" class ="form-control" asp-items="ViewBag.TripTypeId"></select>
-            </div>
+
+            <input type="hidden" asp-for="PackageId" />
+            @*<input type="hidden" asp-for="TripTypeId" />*@
+
+        <div class="form-group">
+            <label asp-for="TripTypeId" class="control-label"></label>
+
+            <select asp-for="TripTypeId" class="form-control">
+                @foreach (G4TEWS4_Data.TripType t in ViewBag.TripTypes)
+                {
+                    <option value="@t.TripTypeId">@t.Ttname</option>
+                }
+            </select>
+            
+        </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

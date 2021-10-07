@@ -90,10 +90,18 @@ namespace TeamLID.TravelExperts.App.Controllers
         // GET: Bookings/Create
         public IActionResult Create()
         {
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustAddress");
-            ViewData["PackageId"] = new SelectList(_context.Packages, "PackageId", "PkgName");
-            ViewData["TripTypeId"] = new SelectList(_context.TripTypes, "TripTypeId", "TripTypeId");
-            return View();
+            var loginCust = HttpContext.Session.GetObject<Customer>("login");
+
+            List<Package> packages = _context.Packages.ToList();
+            List<TripType> tripTypes = _context.TripTypes.ToList();
+            List<Customer> customers = _context.Customers.ToList();
+            ViewBag.Packages = packages;
+            ViewBag.TripTypes = tripTypes;
+            ViewBag.Customers = customers;
+            //ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustUserName");
+            //ViewData["PackageId"] = new SelectList(_context.Packages, "PackageId", "PkgName");
+            //ViewData["TripTypeId"] = new SelectList(_context.TripTypes, "TripTypeId", "TripTypeId");
+            return View("Create", new Booking());
         }
 
         // POST: Bookings/Create
