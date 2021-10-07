@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
@@ -22,14 +23,21 @@ namespace G4TEWS4_Data
 
         [Key]
         public int BookingId { get; set; }
-        [Column(TypeName = "datetime")]
+        [Column(TypeName = "DateTime")]
+        [DataType(DataType.Date)]
+        [DisplayName("Booking Date")]
         public DateTime? BookingDate { get; set; }
         [StringLength(50)]
+        [DisplayName("Booking No")]
         public string BookingNo { get; set; }
+        [DisplayName("Traveler Count")]
         public double? TravelerCount { get; set; }
+        [DisplayName("Customer ID")]
         public int? CustomerId { get; set; }
         [StringLength(1)]
+        [DisplayName("Triptype ID")]
         public string TripTypeId { get; set; }
+        [DisplayName("Package ID")]
         public int? PackageId { get; set; }
 
         [ForeignKey(nameof(CustomerId))]
