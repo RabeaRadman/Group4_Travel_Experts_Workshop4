@@ -13,9 +13,11 @@ namespace G4TEWS4_MVC.Models
     public class LoginViewModel
     {
         [Required]
+        [DisplayName("Username")]
         public string username { get; set; }
 
         [Required]
+        [DisplayName("Password")]
         public string password { get; set; }
     }
 }

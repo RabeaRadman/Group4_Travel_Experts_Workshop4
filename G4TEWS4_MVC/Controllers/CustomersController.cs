@@ -96,11 +96,26 @@ namespace G4TEWS4_MVC.Controllers
 
             if (cust != null)
             {
-                // if username and pin match, add user to session
-                HttpContext.Session.SetObject("login", cust);
-                HttpContext.Session.SetInt32("CustomerID", cust.CustomerId);
-                // direct to history page, with parameter customerId
-                return RedirectToAction("CustomerHistory", new { customerId = cust.CustomerId });
+                var bookings = BookingsManager.GetAllBookingsByCustomer(cust.CustomerId);
+                if (bookings.Count == 0)
+                {
+                    HttpContext.Session.SetObject("login", cust);
+                    HttpContext.Session.SetInt32("CustomerID", cust.CustomerId);
+                    //ViewBag.zerobookings = "Sorry, you have no bookings.";
+                    return View("emptybooking");
+
+                }
+                else {
+                     //if username and pin match, add user to session
+                    HttpContext.Session.SetObject("login", cust);
+                    HttpContext.Session.SetInt32("CustomerID", cust.CustomerId);
+                     //direct to history page, with parameter customerId
+                    return RedirectToAction("CustomerHistory", new { customerId = cust.CustomerId });
+                     }
+                //HttpContext.Session.SetObject("login", cust);
+                //HttpContext.Session.SetInt32("CustomerID", cust.CustomerId);
+                //// direct to history page, with parameter customerId
+                //return RedirectToAction("CustomerHistory", new { customerId = cust.CustomerId });
             }
             else
             {
@@ -151,22 +166,30 @@ namespace G4TEWS4_MVC.Controllers
                 int id = cust.CustomerId;
 
                 var bookings = BookingsManager.GetAllBookingsByCustomer(id);
-                    //.Select(bk => new BookingsModel
-                    //{
-                    //    BookingId = bk.BookingId,
-                    //    BookingDate = bk.BookingDate,
-                    //    BookingNo = bk.BookingNo,
-                    //    TravelerCount = bk.TravelerCount,
-                    //    CustomerId = bk.Customer.CustFirstName,
-                    //    TripTypeId = bk.TripType.Ttname,
-                    //    PackageId = bk.Package.PkgName,
-                    //    Price = Math.Round((decimal)(bk.Package.PkgBasePrice + bk.Package.PkgAgencyCommission), 0),
-                    //    //Total = TotalOwing(bk.Package.PkgBasePrice).ToString("c")
-                    //}).ToList();
-
-                return View(bookings);
-
-
+                //.Select(bk => new BookingsModel
+                //{
+                //    BookingId = bk.BookingId,
+                //    BookingDate = bk.BookingDate,
+                //    BookingNo = bk.BookingNo,
+                //    TravelerCount = bk.TravelerCount,
+                //    CustomerId = bk.Customer.CustFirstName,
+                //    TripTypeId = bk.TripType.Ttname,
+                //    PackageId = bk.Package.PkgName,
+                //    Price = Math.Round((decimal)(bk.Package.PkgBasePrice + bk.Package.PkgAgencyCommission), 0),
+                //    //Total = TotalOwing(bk.Package.PkgBasePrice).ToString("c")
+                //}).ToList();
+                if (bookings.Count == 0)
+                {
+                    return View("emptybooking");
+                }
+                else
+                {
+                    var packages = PackagesDataManager.GetAll().Select(i =>
+                new PackageSearchModel { PackageId = i.PackageId, PkgStartDate = i.PkgStartDate });
+                    //var packages = PackagesDataManager.GetAll();
+                    TempData["Packages"] = packages;
+                    return View(bookings);
+                }
             }
             else
             {

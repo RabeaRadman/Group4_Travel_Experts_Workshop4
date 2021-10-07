@@ -37,7 +37,7 @@
                 <div class="col-md-8">
                     <div class="register-box">
                         <div class="">
-                            <a asp-controller="Customers" asp-action="CustomerHistory"><button class="btn btn-outline-primary">Back to history</button></a>
+                            <a asp-controller="Customers" asp-action="CustomerHistory"><button class="btn btn-outline-primary">Back to Bookings History</button></a>
                            
                                 <a asp-controller="Customers" asp-action="Edit" asp-route-id="@Model.CustomerId"><button class="btn btn-outline-warning">Edit Profile</button></a>
                         </div>
@@ -45,7 +45,7 @@
                         <br />
                         <dl class="row mx-auto">
                             <dt class="col-sm-4">
-                                @Html.DisplayNameFor(model => model.CustFirstName)
+                                @Html.DisplayNameFor(model => model.CustFirstName) 
                             </dt>
                             <dd class="col-sm-8">
                                 @Html.DisplayFor(model => model.CustFirstName)

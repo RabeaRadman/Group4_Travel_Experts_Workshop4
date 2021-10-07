@@ -1,73 +1,89 @@
 ﻿@model IEnumerable<G4TEWS4_Data.Booking>
 
+
 @{
     ViewData["Title"] = "Customer History";
+    //var packages = TempData["Packages"];
+    var message = ViewBag.zerobookings;
 }
 
 <h1>Customer History</h1>
-
-@if (TempData.Keys.Contains("Message"))
-{
-    @*Will pass background color of message box and message>*@
-
-    <p class="@TempData["BGColor"].ToString() text-left text-info p-2">
-        @TempData["Message"]
-    </p>
-
-}
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.BookingDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BookingNo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TravelerCount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Customer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Package)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TripType)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+@*@if (message) { 
+    <h4 class="text-center mt-120">@message</h4>
+    }
+else
+{*@
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BookingDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BookingNo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TravelerCount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Customer.CustAddress)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Package.PkgName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TripType.TripTypeId)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-controller="bookings" asp-route-id="@item.BookingId">Edit</a> |
-                    <a asp-action="Details" asp-controller="bookings" asp-route-id="@item.BookingId">Details</a> |
-                    <a asp-action="Delete" asp-controller="bookings" asp-route-id="@item.BookingId">Delete</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.BookingDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BookingNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TravelerCount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Customer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Package)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TripType)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookingDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookingNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TravelerCount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.CustAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Package.PkgName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TripType.TripTypeId)
+                    </td>
+                    <td>
+
+
+                        @{
+
+                            @foreach (var package in (IEnumerable<PackageSearchModel>)TempData["Packages"])
+                            {
+                                if (package.PackageId == item.PackageId)
+                                {
+                                    if (package.PkgStartDate > DateTime.Today)
+                                    {
+
+                                        <a asp-action="Edit" asp-controller="bookings" asp-route-id="@item.BookingId" class="btn btn-primary">Edit</a>
+
+                                        <a asp-action="Delete" asp-controller="bookings" asp-route-id="@item.BookingId" class="btn btn-danger">Delete</a>
+                                    }
+                                }
+                            }
+
+                        }
+                        <a asp-action="Details" asp-controller="bookings" asp-route-id="@item.BookingId" class="btn btn-success">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+@*}*@
+
