@@ -6,6 +6,16 @@
 
 <h1>Customer History</h1>
 
+@if (TempData.Keys.Contains("Message"))
+{
+    @*Will pass background color of message box and message>*@
+
+    <p class="@TempData["BGColor"].ToString() text-left text-info p-2">
+        @TempData["Message"]
+    </p>
+
+}
+
 <table class="table">
     <thead>
         <tr>
@@ -31,32 +41,33 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookingDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookingNo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TravelerCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Customer.CustAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Package.PkgName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TripType.TripTypeId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-controller="bookings" asp-route-id="@item.BookingId">Edit</a> |
-                <a asp-action="Details" asp-controller="bookings" asp-route-id="@item.BookingId">Details</a> |
-                <a asp-action="Delete" asp-controller="bookings" asp-route-id="@item.BookingId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TravelerCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.CustAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Package.PkgName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TripType.TripTypeId)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-controller="bookings" asp-route-id="@item.BookingId">Edit</a> |
+                    <a asp-action="Details" asp-controller="bookings" asp-route-id="@item.BookingId">Details</a> |
+                    <a asp-action="Delete" asp-controller="bookings" asp-route-id="@item.BookingId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

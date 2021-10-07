@@ -1,0 +1,69 @@
+@model G4TEWS4_Data.Booking
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Bookings</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BookingDate" class="control-label"></label>
+                <input asp-for="BookingDate" class="form-control" />
+                <span asp-validation-for="BookingDate" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+            <label asp-for="BookingNo" class="control-label"></label>
+            <input asp-for="BookingNo" class="form-control" />
+            <span asp-validation-for="BookingNo" class="text-danger"></span>
+        </div>*@
+            <div class="form-group">
+                <label asp-for="TravelerCount" class="control-label"></label>
+                <input asp-for="TravelerCount" class="form-control" />
+                <span asp-validation-for="TravelerCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerId" class="control-label"></label>
+                <select asp-for="CustomerId" class="form-control">
+                    @foreach (G4TEWS4_Data.Customer c in ViewBag.Customers)
+                    {
+                       <option value="@c.CustomerId">@c.CustUserName</option>
+                    }
+                </select>
+            </div>
+
+            <input type="hidden" asp-for="PackageId" />
+            @*<input type="hidden" asp-for="TripTypeId" />*@
+
+        <div class="form-group">
+            <label asp-for="TripTypeId" class="control-label"></label>
+
+            <select asp-for="TripTypeId" class="form-control">
+                @foreach (G4TEWS4_Data.TripType t in ViewBag.TripTypes)
+                {
+                    <option value="@t.TripTypeId">@t.Ttname</option>
+                }
+            </select>
+            
+        </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<partial name="CreateDetail" />
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
