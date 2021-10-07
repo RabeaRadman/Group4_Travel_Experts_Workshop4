@@ -4,14 +4,15 @@
 @{
     ViewData["Title"] = "Customer History";
     //var packages = TempData["Packages"];
+    var message = ViewBag.zerobookings;
 }
 
 <h1>Customer History</h1>
-@if (Model.Count() == 0) { 
-    <h4 class="text-center mt-120">You have no bookings</h4>
+@*@if (message) { 
+    <h4 class="text-center mt-120">@message</h4>
     }
 else
-{
+{*@
     <table class="table">
         <thead>
             <tr>
@@ -78,11 +79,9 @@ else
 
                         }
                         <a asp-action="Details" asp-controller="bookings" asp-route-id="@item.BookingId" class="btn btn-success">Details</a>
-
-
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-}
+@*}*@

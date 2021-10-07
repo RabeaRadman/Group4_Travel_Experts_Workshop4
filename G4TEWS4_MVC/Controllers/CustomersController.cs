@@ -96,11 +96,26 @@ namespace G4TEWS4_MVC.Controllers
 
             if (cust != null)
             {
-                // if username and pin match, add user to session
-                HttpContext.Session.SetObject("login", cust);
-                HttpContext.Session.SetInt32("CustomerID", cust.CustomerId);
-                // direct to history page, with parameter customerId
-                return RedirectToAction("CustomerHistory", new { customerId = cust.CustomerId });
+                var bookings = BookingsManager.GetAllBookingsByCustomer(cust.CustomerId);
+                if (bookings.Count == 0)
+                {
+                    HttpContext.Session.SetObject("login", cust);
+                    HttpContext.Session.SetInt32("CustomerID", cust.CustomerId);
+                    //ViewBag.zerobookings = "Sorry, you have no bookings.";
+                    return View("emptybooking");
+
+                }
+                else {
+                     //if username and pin match, add user to session
+                    HttpContext.Session.SetObject("login", cust);
+                    HttpContext.Session.SetInt32("CustomerID", cust.CustomerId);
+                     //direct to history page, with parameter customerId
+                    return RedirectToAction("CustomerHistory", new { customerId = cust.CustomerId });
+                     }
+                //HttpContext.Session.SetObject("login", cust);
+                //HttpContext.Session.SetInt32("CustomerID", cust.CustomerId);
+                //// direct to history page, with parameter customerId
+                //return RedirectToAction("CustomerHistory", new { customerId = cust.CustomerId });
             }
             else
             {
@@ -163,13 +178,18 @@ namespace G4TEWS4_MVC.Controllers
                 //    Price = Math.Round((decimal)(bk.Package.PkgBasePrice + bk.Package.PkgAgencyCommission), 0),
                 //    //Total = TotalOwing(bk.Package.PkgBasePrice).ToString("c")
                 //}).ToList();
-                var packages = PackagesDataManager.GetAll().Select(i=> 
-                new PackageSearchModel{ PackageId = i.PackageId, PkgStartDate = i.PkgStartDate});
-                //var packages = PackagesDataManager.GetAll();
-                TempData["Packages"] = packages;
-                return View(bookings);
-
-
+                if (bookings.Count == 0)
+                {
+                    return View("emptybooking");
+                }
+                else
+                {
+                    var packages = PackagesDataManager.GetAll().Select(i =>
+                new PackageSearchModel { PackageId = i.PackageId, PkgStartDate = i.PkgStartDate });
+                    //var packages = PackagesDataManager.GetAll();
+                    TempData["Packages"] = packages;
+                    return View(bookings);
+                }
             }
             else
             {
