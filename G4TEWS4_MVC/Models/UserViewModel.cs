@@ -51,13 +51,13 @@ namespace G4TEWS4_MVC.Models
         [Required,DisplayName("Email")]
         public string CustEmail { get; set; }
 
-        [Required, MinLength(5, ErrorMessage = "Username must be at least 5 digits."), MaxLength(50)]
+        [Required, DisplayName("Username"), MinLength(5, ErrorMessage = "Username must be at least 5 digits."), MaxLength(50)]
         public string CustUserName { get; set; }
 
         [Required]
-        [DataType(DataType.Password), MinLength(5, ErrorMessage = "Password must be at least 5 digits."), MaxLength(50)]
+        [DataType(DataType.Password), DisplayName("Password"), MinLength(5, ErrorMessage = "Password must be at least 5 digits."), MaxLength(50)]
         public string CustPassword { get; set; }
-
+        [Required]
         [DataType(DataType.Password),Compare(nameof(CustPassword)),DisplayName("Password Confirm")]
         public string PasswordConfirm { get; set; }
 
