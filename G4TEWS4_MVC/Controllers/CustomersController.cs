@@ -151,19 +151,22 @@ namespace G4TEWS4_MVC.Controllers
                 int id = cust.CustomerId;
 
                 var bookings = BookingsManager.GetAllBookingsByCustomer(id);
-                    //.Select(bk => new BookingsModel
-                    //{
-                    //    BookingId = bk.BookingId,
-                    //    BookingDate = bk.BookingDate,
-                    //    BookingNo = bk.BookingNo,
-                    //    TravelerCount = bk.TravelerCount,
-                    //    CustomerId = bk.Customer.CustFirstName,
-                    //    TripTypeId = bk.TripType.Ttname,
-                    //    PackageId = bk.Package.PkgName,
-                    //    Price = Math.Round((decimal)(bk.Package.PkgBasePrice + bk.Package.PkgAgencyCommission), 0),
-                    //    //Total = TotalOwing(bk.Package.PkgBasePrice).ToString("c")
-                    //}).ToList();
-
+                //.Select(bk => new BookingsModel
+                //{
+                //    BookingId = bk.BookingId,
+                //    BookingDate = bk.BookingDate,
+                //    BookingNo = bk.BookingNo,
+                //    TravelerCount = bk.TravelerCount,
+                //    CustomerId = bk.Customer.CustFirstName,
+                //    TripTypeId = bk.TripType.Ttname,
+                //    PackageId = bk.Package.PkgName,
+                //    Price = Math.Round((decimal)(bk.Package.PkgBasePrice + bk.Package.PkgAgencyCommission), 0),
+                //    //Total = TotalOwing(bk.Package.PkgBasePrice).ToString("c")
+                //}).ToList();
+                var packages = PackagesDataManager.GetAll().Select(i=> 
+                new PackageSearchModel{ PackageId = i.PackageId, PkgStartDate = i.PkgStartDate});
+                //var packages = PackagesDataManager.GetAll();
+                TempData["Packages"] = packages;
                 return View(bookings);
 
 
