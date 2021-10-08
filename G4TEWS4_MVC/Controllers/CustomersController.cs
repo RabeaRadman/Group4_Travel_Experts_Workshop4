@@ -109,7 +109,7 @@ namespace G4TEWS4_MVC.Controllers
                      //if username and pin match, add user to session
                     HttpContext.Session.SetObject("login", cust);
                     HttpContext.Session.SetInt32("CustomerID", cust.CustomerId);
-                     //direct to history page, with parameter customerId
+                    //direct to history page, with parameter customerId
                     return RedirectToAction("CustomerHistory", new { customerId = cust.CustomerId });
                      }
                 //HttpContext.Session.SetObject("login", cust);
@@ -188,7 +188,7 @@ namespace G4TEWS4_MVC.Controllers
                 new PackageSearchModel { PackageId = i.PackageId, PkgStartDate = i.PkgStartDate });
                     //var packages = PackagesDataManager.GetAll();
                     TempData["Packages"] = packages;
-                    return View(bookings);
+                    return View(bookings.OrderBy(dt => dt.Package.PkgStartDate));
                 }
             }
             else

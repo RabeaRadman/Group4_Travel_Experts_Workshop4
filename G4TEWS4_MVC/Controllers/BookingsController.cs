@@ -129,6 +129,7 @@ namespace TeamLID.TravelExperts.App.Controllers
 
         public ActionResult Edit(int id)
         {
+            var loginCust = HttpContext.Session.GetObject<Customer>("login");
             List<TripType> tripTypes = _context.TripTypes.ToList();
             ViewBag.TripTypes = tripTypes;
             BookingBookingDetailModel bbdm = new();
@@ -148,6 +149,8 @@ namespace TeamLID.TravelExperts.App.Controllers
             bbdm.StartDate = package.PkgStartDate;
             bbdm.EndDate = package.PkgEndDate;
             ViewBag.AddOrUpdate = "Update";
+            ViewBag.CustName = CustomerPackageMgr.CustFullName(loginCust.CustomerId);
+            ViewBag.PkgName = package.PkgName;
             return View("Edit", bbdm);
         }
 
@@ -316,12 +319,15 @@ namespace TeamLID.TravelExperts.App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var loginCust = HttpContext.Session.GetObject<Customer>("login");
+            int CustID = loginCust.CustomerId;
+
             var bookings = await _context.Bookings.FindAsync(id);
             _context.Bookings.Remove(bookings);
             await _context.SaveChangesAsync();
             TempData["Message"] = "Booking successfully updated.";
             TempData["BGColor"] = "bg-success";
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("CustomerHistory", "Customers", CustID);
         }
 
         private bool BookingsExists(int id)

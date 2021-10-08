@@ -45,7 +45,7 @@ namespace G4TEWS4_MVC.Models
         [DataType(DataType.Currency), DisplayName("Base Price (CAD$)")]
         public decimal? BasePrice { get; set; }
 
-        [DisplayName("Total Owing")]
+        [DisplayName("Total Owing (CAD$) - Includes Commission")]
         public decimal? Total { get; set; }
     }
 }
