@@ -96,23 +96,35 @@ namespace TeamLID.TravelExperts.App.Controllers
             Package package = new();
 
             package = _context.Packages.Find(pkgId);
-
+            BookingBookingDetailModel bbdm = new();
             List<TripType> tripTypes = _context.TripTypes.ToList();
-            List<Customer> customers = _context.Customers.ToList();
             ViewBag.TripTypes = tripTypes;
             ViewBag.PackageiId = pkgId;
+            
+            bbdm.PackageId = pkgId.ToString();
             ViewBag.PackageName = package.PkgName;
+            
             ViewBag.PackageDesc = package.PkgDesc;
+            bbdm.PkgDesc = package.PkgDesc;
+
             ViewBag.PackageBasePrice = package.PkgBasePrice;
+            bbdm.BasePrice = package.PkgBasePrice;
+
             ViewBag.PackageSD = package.PkgStartDate;
+            bbdm.StartDate = package.PkgStartDate;
+
             ViewBag.PackageED = package.PkgEndDate;
+            bbdm.EndDate = package.PkgEndDate;
+
             ViewBag.CustomerId = loginCust.CustomerId;
+            bbdm.CustomerId = loginCust.CustomerId.ToString();
+
             ViewBag.CustFullName = CustomerPackageMgr.CustFullName(loginCust.CustomerId);
             //ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustUserName");
             //ViewData["PackageId"] = new SelectList(_context.Packages, "PackageId", "PkgName");
             //ViewData["TripTypeId"] = new SelectList(_context.TripTypes, "TripTypeId", "TripTypeId");
             ViewBag.AddOrUpdate = "Add";
-            return View("Edit", new BookingBookingDetailModel());
+            return View("Edit", bbdm);
         }
 
         public ActionResult Edit(int id)
