@@ -1,20 +1,38 @@
-﻿@model G4TEWS4_Data.Booking
+﻿@model G4TEWS4_MVC.Models.BookingBookingDetailModel
 
-@{ ViewData["Title"] = "Edit"; }
-
-<h1>Edit</h1>
-
-<h4>Bookings</h4>
+<h4>@ViewBag.PackageName - @ViewBag.PackageDesc</h4>
+<h5>@ViewBag.CustFullName</h5>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
+            <input type="hidden" asp-for="PackageId" value="@ViewBag.PackageiId" />
+            <input type="hidden" asp-for="CustomerId" value="@ViewBag.CustomerId" />
+            <input type="hidden" asp-for="BookingId" value="@ViewBag.BookingId" />
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="BookingId" />
+
+            @*<div class="form-group">
+            <label asp-for="BookingId" class="control-label"></label>
+            <input asp-for="BookingId" class="form-control" />
+            <span asp-validation-for="BookingId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="BookingDetailId" class="control-label"></label>
+            <input asp-for="BookingDetailId" class="form-control" />
+            <span asp-validation-for="BookingDetailId" class="text-danger"></span>
+        </div>*@
+
             <div class="form-group">
                 <label asp-for="BookingDate" class="control-label"></label>
                 <input asp-for="BookingDate" class="form-control" />
                 <span asp-validation-for="BookingDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PkgDesc" class="control-label"></label>
+                <input asp-for="PkgDesc" class="form-control" />
+                <span asp-validation-for="PkgDesc" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="BookingNo" class="control-label"></label>
@@ -26,32 +44,210 @@
                 <input readonly asp-for="TravelerCount" class="form-control" />
                 <span asp-validation-for="TravelerCount" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
+            <label asp-for="CustomerId" class="control-label"></label>
+                <input asp-for="CustomerId" class="form-control" />
                 <label asp-for="CustomerId" class="control-label"></label>
-                <input readonly asp-for="CustomerId" class="form-control" asp-items="ViewBag.CustomerId"/>
-                <span asp-validation-for="CustomerId" class="text-danger"></span>
-            </div>
+
+            <select asp-for="CustomerId" class="form-control">
+                <option value="">Select customer ...</option>
+                @foreach (G4TEWS4_Data.Customer c in ViewBag.Customers)
+                {
+                    <option value="@c.CustomerId">@c.CustUserName</option>
+                }
+            </select>
+            <span asp-validation-for="CustomerId" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
                 <label asp-for="TripTypeId" class="control-label"></label>
-                <select readonly asp-for="TripTypeId" class="form-control" asp-items="ViewBag.TripTypeId"></select>
+                @*<input asp-for="TripTypeId" class="form-control" />*@
+                <select asp-for="TripTypeId" class="form-control">
+                    <option value="">Select trip type ...</option>
+                    @foreach (G4TEWS4_Data.TripType t in ViewBag.TripTypes)
+                    {
+                    <option value="@t.TripTypeId">@t.Ttname</option>
+                    }
+                </select>
+
                 <span asp-validation-for="TripTypeId" class="text-danger"></span>
             </div>
+            <!--<div class="form-group">
+    <label asp-for="PackageId" class="control-label"></label>
+    <h6>@ViewBag.PackageiId</h6>-->
+            @*<input  asp-for="PackageId" class="form-control" />*@
+            <!--<span asp-validation-for="PackageId" class="text-danger"></span>
+    </div>-->
+            @*<div class="form-group">
+            <label asp-for="ItineraryNo" class="control-label"></label>
+            <input asp-for="ItineraryNo" class="form-control" />
+            <span asp-validation-for="ItineraryNo" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
-                <label asp-for="PackageId" class="control-label"></label>
-                <select readonly asp-for="PackageId" class="form-control" asp-items="ViewBag.PackageId"></select>
-                <span asp-validation-for="PackageId" class="text-danger"></span>
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BasePrice" class="control-label"></label>
+                <input asp-for="BasePrice" class="form-control" />
+                <span asp-validation-for="BasePrice" class="text-danger"></span>
+            </div>
+            @if (ViewBag.AddOrUpdate == "Update") {
+            <div class="form-group">
+
+                <label asp-for="Total" class="control-label"></label>
+                <input asp-for="Total" class="form-control" />
+                <span asp-validation-for="Total" class="text-danger"></span>
+
+            </div>
+            }
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-controller="Packages" asp-action="Index"><input type="button" value="Cancel" class="btn btn-secondary" /></a>
             </div>
         </form>
     </div>
 </div>
 
+
 <div>
     <a asp-controller="Customers" asp-action="CustomerHistory" class="btn btn-primary">Back to List</a>
 </div>
 
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@model G4TEWS4_MVC.Models.BookingBookingDetailModel
+
+    @{
+        ViewData["Title"] = "Edit";
+    }
+
+    <h1>Edit</h1>
+
+    <h4>BookingBookingDetailModel</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="BookingId" class="control-label"></label>
+                    <input asp-for="BookingId" class="form-control" />
+                    <span asp-validation-for="BookingId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BookingDate" class="control-label"></label>
+                    <input asp-for="BookingDate" class="form-control" />
+                    <span asp-validation-for="BookingDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PkgDesc" class="control-label"></label>
+                    <input asp-for="PkgDesc" class="form-control" />
+                    <span asp-validation-for="PkgDesc" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BookingNo" class="control-label"></label>
+                    <input asp-for="BookingNo" class="form-control" />
+                    <span asp-validation-for="BookingNo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TravelerCount" class="control-label"></label>
+                    <input asp-for="TravelerCount" class="form-control" />
+                    <span asp-validation-for="TravelerCount" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CustomerId" class="control-label"></label>
+                    <input asp-for="CustomerId" class="form-control" />
+                    <span asp-validation-for="CustomerId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TripTypeId" class="control-label"></label>
+                    <input asp-for="TripTypeId" class="form-control" />
+                    <span asp-validation-for="TripTypeId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PackageId" class="control-label"></label>
+                    <input asp-for="PackageId" class="form-control" />
+                    <span asp-validation-for="PackageId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BookingDetailId" class="control-label"></label>
+                    <input asp-for="BookingDetailId" class="form-control" />
+                    <span asp-validation-for="BookingDetailId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ItineraryNo" class="control-label"></label>
+                    <input asp-for="ItineraryNo" class="form-control" />
+                    <span asp-validation-for="ItineraryNo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TripStart" class="control-label"></label>
+                    <input asp-for="TripStart" class="form-control" />
+                    <span asp-validation-for="TripStart" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TripEnd" class="control-label"></label>
+                    <input asp-for="TripEnd" class="form-control" />
+                    <span asp-validation-for="TripEnd" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BasePrice" class="control-label"></label>
+                    <input asp-for="BasePrice" class="form-control" />
+                    <span asp-validation-for="BasePrice" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Total" class="control-label"></label>
+                    <input asp-for="Total" class="form-control" />
+                    <span asp-validation-for="Total" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>*@
+
+

@@ -30,4 +30,8 @@
     <ProjectReference Include="..\G4TEWS4_Data\G4TEWS4_Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Bookings\Details\" />
+  </ItemGroup>
+
 </Project>
