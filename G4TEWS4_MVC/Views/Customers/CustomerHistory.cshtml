@@ -8,6 +8,7 @@
 }
 
 <h1>Customer History</h1>
+<h4>@ViewBag.CustomerName</h4>
 @*@if (message) { 
     <h4 class="text-center mt-120">@message</h4>
     }
@@ -46,7 +47,7 @@ else
         </td>*@
 
                 <td>
-                    @String.Format("{0:dd/MM/yyyy}", item.Package.PkgStartDate)
+                    @String.Format("{0:dd/MMM/yyyy}", item.Package.PkgStartDate)
                     @*@Html.DisplayFor(modelItem => item.Package.PkgStartDate)*@
                 </td>
                 <td>

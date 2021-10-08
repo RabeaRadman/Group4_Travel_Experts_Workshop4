@@ -122,10 +122,12 @@ Purpose: Packages page design
                                     @Html.DisplayFor(modelItem => item.PkgName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.PkgStartDate)
+                                    @String.Format("{0:dd/MMM/yyyy}", item.PkgStartDate)
+                                    @*@Html.DisplayFor(modelItem => item.PkgStartDate)*@
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.PkgEndDate)
+                                    @String.Format("{0:dd/MMM/yyyy}", item.PkgEndDate)
+                                    @*@Html.DisplayFor(modelItem => item.PkgEndDate)*@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.PkgDesc)
@@ -136,17 +138,21 @@ Purpose: Packages page design
 
                                 <input type="hidden" asp-for="@item.PackageId" />
 
-                                <td>
-                                    @if (id != null)
-                                    {
-                                        <a asp-controller="Bookings" asp-action="Create" asp-route-pkgid="@item.PackageId"><button class="btn btn-outline-success">Book</button></a>
-                                    }
-                                    else
-                                    {
-                                        <a asp-controller="Customers" asp-action="Login"><button class="btn btn-outline-success">Book</button></a>
-                                    }
+                                @if (item.PkgStartDate >= DateTime.Today)
+                                {
+                                    <td>
+                                        @if (id != null)
+                                        {
+                                            <a asp-controller="Bookings" asp-action="Create" asp-route-pkgid="@item.PackageId"><button class="btn btn-outline-success">Book</button></a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-controller="Customers" asp-action="Login"><button class="btn btn-outline-success">Book</button></a>
+                                        }
 
-                                </td>
+                                    </td>
+                                }
+
                                 @*<td>
             @Html.DisplayFor(modelItem => item.PkgAgencyCommission)
         </td>*@
