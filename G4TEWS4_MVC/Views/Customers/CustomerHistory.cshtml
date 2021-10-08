@@ -10,7 +10,7 @@
 <h1>Customer History</h1>
 @*@if (message) { 
     <h4 class="text-center mt-120">@message</h4>
-    }
+    } check
 else
 {*@
     <table class="table">
@@ -61,9 +61,7 @@ else
                     </td>
                     <td>
 
-
                         @{
-
                             @foreach (var package in (IEnumerable<PackageSearchModel>)TempData["Packages"])
                             {
                                 if (package.PackageId == item.PackageId)
