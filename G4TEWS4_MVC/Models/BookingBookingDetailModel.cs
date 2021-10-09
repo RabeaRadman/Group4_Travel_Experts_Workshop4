@@ -5,6 +5,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
+/*
+ * Author: Gilmar Castillo
+ * This model will gather all information necesary for CRUD operations of a booking record
+ * 
+ */
 namespace G4TEWS4_MVC.Models
 {
     public class BookingBookingDetailModel

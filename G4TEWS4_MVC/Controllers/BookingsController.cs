@@ -99,34 +99,37 @@ namespace TeamLID.TravelExperts.App.Controllers
             BookingBookingDetailModel bbdm = new();
             List<TripType> tripTypes = _context.TripTypes.ToList();
             ViewBag.TripTypes = tripTypes;
-            ViewBag.PackageiId = pkgId;
+            //ViewBag.PackageiId = pkgId;
             
             bbdm.PackageId = pkgId.ToString();
-            ViewBag.PackageName = package.PkgName;
+            //ViewBag.PackageName = package.PkgName;
             
-            ViewBag.PackageDesc = package.PkgDesc;
+            //ViewBag.PackageDesc = package.PkgDesc;
             bbdm.PkgDesc = package.PkgDesc;
 
-            ViewBag.PackageBasePrice = package.PkgBasePrice;
+            //ViewBag.PackageBasePrice = package.PkgBasePrice;
             bbdm.BasePrice = package.PkgBasePrice;
 
-            ViewBag.PackageSD = package.PkgStartDate;
+            //ViewBag.PackageSD = package.PkgStartDate;
             bbdm.StartDate = package.PkgStartDate;
 
-            ViewBag.PackageED = package.PkgEndDate;
+            //ViewBag.PackageED = package.PkgEndDate;
             bbdm.EndDate = package.PkgEndDate;
 
-            ViewBag.CustomerId = loginCust.CustomerId;
+            //ViewBag.CustomerId = loginCust.CustomerId;
             bbdm.CustomerId = loginCust.CustomerId.ToString();
 
             ViewBag.CustFullName = CustomerPackageMgr.CustFullName(loginCust.CustomerId);
-            //ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustUserName");
-            //ViewData["PackageId"] = new SelectList(_context.Packages, "PackageId", "PkgName");
-            //ViewData["TripTypeId"] = new SelectList(_context.TripTypes, "TripTypeId", "TripTypeId");
+
             ViewBag.AddOrUpdate = "Add";
             return View("Edit", bbdm);
         }
-
+        /// <summary>
+        /// Author: Gilmar Castillo
+        /// GET: Edit a booking
+        /// </summary>
+        /// <param name="id">Booking Id</param>
+        /// <returns></returns>
         public ActionResult Edit(int id)
         {
             var loginCust = HttpContext.Session.GetObject<Customer>("login");
@@ -181,21 +184,6 @@ namespace TeamLID.TravelExperts.App.Controllers
                         _context.Add(booking);
                         _context.SaveChanges();
 
-                        //// Create the corresponding details for the booking
-                        //BookingDetail bookingDetail = new();
-                        //bookingDetail.AgencyCommission = bbdm.BasePrice * 0.1m;
-                        //bookingDetail.BasePrice = bbdm.BasePrice;
-                        //bookingDetail.TripStart = bbdm.StartDate;
-                        //bookingDetail.TripEnd = bbdm.EndDate;
-
-                        //// Hard coded (default) foreign key values
-                        //bookingDetail.ClassId = "SNG"; // Single
-                        //bookingDetail.FeeId = "BK"; // Booking charge
-                        //bookingDetail.ProductSupplierId = 1918; //MARKET SQUARE TOURS
-                        //bookingDetail.RegionId = "EU"; // Europe & UK
-                        //bookingDetail.ItineraryNo = 855; //855
-                        //_context.Add(bookingDetail);
-                        //_context.SaveChanges();
                         TempData["Message"] = "New Booking successfully created.";
                     }
                     else // otherwise, it is an update scenario
@@ -206,13 +194,6 @@ namespace TeamLID.TravelExperts.App.Controllers
                         oldBooking.TravelerCount = bbdm.TravelerCount;
                         oldBooking.TripTypeId = bbdm.TripTypeId;
                         _context.SaveChanges();
-
-                        //BookingDetail oldBD = _context.BookingDetails.Find(bbdm.BookingDetailId);
-                        //oldBD.AgencyCommission = bbdm.Price * 0.1m;
-                        //oldBD.BasePrice = bbdm.BasePrice;
-                        //oldBD.TripStart = bbdm.TripStart;
-                        //oldBD.TripEnd = bbdm.TripEnd;
-                        //_context.SaveChanges();
                         TempData["Message"] = "Booking successfully updated.";
                     }
                     TempData["BGColor"] = "bg-success";
@@ -234,64 +215,6 @@ namespace TeamLID.TravelExperts.App.Controllers
             }
 
         }
-
-        // GET: Bookings/Edit/5
-        //public async Task<IActionResult> Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var bookings = await _context.Bookings.FindAsync(id);
-        //    if (bookings == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustAddress", bookings.CustomerId);
-        //    ViewData["PackageId"] = new SelectList(_context.Packages, "PackageId", "PkgName", bookings.PackageId);
-        //    ViewData["TripTypeId"] = new SelectList(_context.TripTypes, "TripTypeId", "TripTypeId", bookings.TripTypeId);
-        //    return View(bookings);
-        //}
-
-        // POST: Bookings/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("BookingId,BookingDate,BookingNo,TravelerCount,CustomerId,TripTypeId,PackageId")] Booking bookings)
-        //{
-        //    if (id != bookings.BookingId)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(bookings);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!BookingsExists(bookings.BookingId))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction("CustomerHistory", "Customers");
-        //    }
-        //    ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustAddress", bookings.CustomerId);
-        //    ViewData["PackageId"] = new SelectList(_context.Packages, "PackageId", "PkgName", bookings.PackageId);
-        //    ViewData["TripTypeId"] = new SelectList(_context.TripTypes, "TripTypeId", "TripTypeId", bookings.TripTypeId);
-        //    //return View(bookings);
-        //    return RedirectToAction("CustomerHistory", "Customers");
-        //}
 
         // GET: Bookings/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -325,7 +248,8 @@ namespace TeamLID.TravelExperts.App.Controllers
             var bookings = await _context.Bookings.FindAsync(id);
             _context.Bookings.Remove(bookings);
             await _context.SaveChangesAsync();
-            TempData["Message"] = "Booking successfully updated.";
+            // Friendly message upon successfull delete
+            TempData["Message"] = "Booking successfully deleted.";
             TempData["BGColor"] = "bg-success";
             return RedirectToAction("CustomerHistory", "Customers", CustID);
         }
