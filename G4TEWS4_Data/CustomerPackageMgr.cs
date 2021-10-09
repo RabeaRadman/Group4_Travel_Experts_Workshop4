@@ -14,7 +14,14 @@ namespace G4TEWS4_Data
             List<Package> allPackages = _context.Packages.ToList();
             return allPackages;
         }
-
+        /// <summary>
+        /// Author: Gilmar Castillo
+        /// 
+        /// Method to return the full name of a customer
+        /// 
+        /// </summary>
+        /// <param name="custId">Customer Id</param>
+        /// <returns>Customer full name</returns>
         public static string CustFullName(int custId)
         {
             string custFullName;

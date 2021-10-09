@@ -1,5 +1,8 @@
 ﻿@model G4TEWS4_MVC.Models.BookingBookingDetailModel
 
+
+@*Author: Gilmar Castillo*@
+
 @if (ViewBag.AddOrUpdate == "Update")
 {
     <h4>@ViewBag.PkgName - @Model.PkgDesc </h4>
@@ -20,18 +23,6 @@ else
             <input type="hidden" asp-for="BookingId" />
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-            @*<div class="form-group">
-                    <label asp-for="BookingId" class="control-label"></label>
-                    <input asp-for="BookingId" class="form-control" />
-                    <span asp-validation-for="BookingId" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="BookingDetailId" class="control-label"></label>
-                    <input asp-for="BookingDetailId" class="form-control" />
-                    <span asp-validation-for="BookingDetailId" class="text-danger"></span>
-                </div>*@
 
             <div class="form-group">
                 <label asp-for="BookingDate" class="control-label"></label>

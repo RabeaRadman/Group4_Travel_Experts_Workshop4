@@ -112,10 +112,6 @@ namespace G4TEWS4_MVC.Controllers
                     //direct to history page, with parameter customerId
                     return RedirectToAction("CustomerHistory", new { customerId = cust.CustomerId });
                      }
-                //HttpContext.Session.SetObject("login", cust);
-                //HttpContext.Session.SetInt32("CustomerID", cust.CustomerId);
-                //// direct to history page, with parameter customerId
-                //return RedirectToAction("CustomerHistory", new { customerId = cust.CustomerId });
             }
             else
             {
@@ -166,18 +162,6 @@ namespace G4TEWS4_MVC.Controllers
                 int id = cust.CustomerId;
 
                 var bookings = BookingsManager.GetAllBookingsByCustomer(id);
-                //.Select(bk => new BookingsModel
-                //{
-                //    BookingId = bk.BookingId,
-                //    BookingDate = bk.BookingDate,
-                //    BookingNo = bk.BookingNo,
-                //    TravelerCount = bk.TravelerCount,
-                //    CustomerId = bk.Customer.CustFirstName,
-                //    TripTypeId = bk.TripType.Ttname,
-                //    PackageId = bk.Package.PkgName,
-                //    Price = Math.Round((decimal)(bk.Package.PkgBasePrice + bk.Package.PkgAgencyCommission), 0),
-                //    //Total = TotalOwing(bk.Package.PkgBasePrice).ToString("c")
-                //}).ToList();
                 if (bookings.Count == 0)
                 {
                     return View("emptybooking");
@@ -188,7 +172,7 @@ namespace G4TEWS4_MVC.Controllers
                 new PackageSearchModel { PackageId = i.PackageId, PkgStartDate = i.PkgStartDate });
                     //var packages = PackagesDataManager.GetAll();
                     TempData["Packages"] = packages;
-                    return View(bookings.OrderBy(dt => dt.Package.PkgStartDate));
+                    return View(bookings.OrderBy(dt => dt.Package.PkgStartDate)); // *** Gilmar Castillo: added sorting
                 }
             }
             else
