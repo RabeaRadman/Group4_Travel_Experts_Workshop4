@@ -1,37 +1,28 @@
-﻿/*
- Author: Rabea, Tiffanie
-Purpose: Get booking history for customers
-*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using G4TEWS4_Data;
-
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace G4TEWS4_MVC.Models
 {
-    //// <summary>
-    /// Booking model
-    /// </summary>
-    public class BookingsModel
+    public class BookingBookingDetailModel
     {
-        public int BookingId { get; set; }
-
+        // Booking fields
+        public string BookingId { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date), DisplayName("Booking Date")]
         public DateTime? BookingDate { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date), DisplayName("Start Date")]
+        public DateTime? StartDate { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [DataType(DataType.Date), DisplayName("Trip Start Date")]
-        public DateTime? PkgStartDate { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [DataType(DataType.Date), DisplayName("Trip End Date")]
-        public DateTime? PkgEndDate { get; set; }
+        [DataType(DataType.Date), DisplayName("End Date")]
+        public DateTime? EndDate { get; set; }
 
         [DisplayName("Trip Description")]
         public string PkgDesc { get; set; }
@@ -51,10 +42,10 @@ namespace G4TEWS4_MVC.Models
         [DisplayName("Package Booked")]
         public string PackageId { get; set; }
 
-        [DataType(DataType.Currency), DisplayName("Price (CAD$)")]
-        public decimal Price { get; set; }
+        [DataType(DataType.Currency), DisplayName("Base Price (CAD$)")]
+        public decimal? BasePrice { get; set; }
 
         [DisplayName("Total Owing")]
-        public string Total { get; set; }
+        public decimal? Total { get; set; }
     }
 }

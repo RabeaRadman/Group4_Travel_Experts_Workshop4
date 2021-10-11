@@ -140,7 +140,7 @@ Purpose: Packages page design
                                 <td>
                                     @if (id != null)
                                     {
-                                        <a asp-controller="Bookings" asp-action="create"><button class="btn btn-outline-success">Book</button></a>
+                                        <a asp-controller="Bookings" asp-action="Create" asp-route-pkgid="@item.PackageId"><button class="btn btn-outline-success">Book</button></a>
                                     }
                                     else
                                     {
