@@ -1,11 +1,11 @@
 ﻿/*
+Author: Rabea,Tiffanie
 Purpose: Get customer profile and enable authentication
 */
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-//using TeamLID.TravelExperts.Repository.Domain;
 using G4TEWS4_Data;
 
 namespace G4TEWS4_MVC.Models.DataManager

@@ -1,4 +1,5 @@
 ﻿/*
+ Author: Rabea, Tiffanie
 Purpose: Get booking history for customers
 */
 

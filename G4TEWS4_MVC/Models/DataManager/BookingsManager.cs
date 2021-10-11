@@ -1,4 +1,5 @@
 ﻿/*
+Author: Rabea with help of Masoud B.
 Purpose: Get bookings history for customers
 */
 using System;

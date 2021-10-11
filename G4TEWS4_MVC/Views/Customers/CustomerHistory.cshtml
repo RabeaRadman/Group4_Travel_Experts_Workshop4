@@ -1,4 +1,8 @@
-﻿@model IEnumerable<G4TEWS4_Data.Booking>
+﻿@*/*
+    Purpose: Get booking history for customers
+ */*@
+
+@model IEnumerable<G4TEWS4_Data.Booking>
 
 
 @{
@@ -90,8 +94,8 @@ else
                     <a asp-action="Details" asp-controller="bookings" asp-route-id="@item.BookingId" class="btn btn-success">Details</a>
                 </td>
             </tr>
-            }
-        </tbody>
-    </table>
-@*}*@
+        }
+    </tbody>
+</table>
+
 

@@ -1,4 +1,5 @@
-﻿/*
+﻿/* 
+Author: Rabea, Tiffanie with help of Masoud B and Osama M.
 Purpose: Direct customers to register, login, profile, logout pages.
 */
 using System;
@@ -298,7 +299,7 @@ namespace G4TEWS4_MVC.Controllers
         }
 
 
-        //This wasn't used eventually, TODO: Nuke it
+        //This wasn't used eventually, TODO:   remove it
         public decimal TotalOwing(decimal amount)
         {
             decimal total = 0;
