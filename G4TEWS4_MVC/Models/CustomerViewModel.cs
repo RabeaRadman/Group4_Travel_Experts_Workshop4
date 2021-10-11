@@ -1,4 +1,5 @@
 ﻿/*
+Author: Rabea, Tiffanie
 Purpose: Get customer
 */
 using System;

@@ -1,4 +1,8 @@
-﻿using G4TEWS4_Data;
+﻿/*
+Author: Rabea, Tiffanie
+Purpose: Retrieve and display all packages
+*/
+using G4TEWS4_Data;
 using G4TEWS4_MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

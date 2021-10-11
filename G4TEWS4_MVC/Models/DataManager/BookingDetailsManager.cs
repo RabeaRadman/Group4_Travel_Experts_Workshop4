@@ -1,4 +1,5 @@
 ﻿/*
+Author: Rabea, Tiffanie 
 Purpose: To Get booking details for customers
 */
 using Microsoft.EntityFrameworkCore;

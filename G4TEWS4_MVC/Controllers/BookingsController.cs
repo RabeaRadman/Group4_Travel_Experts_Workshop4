@@ -1,4 +1,5 @@
 /*
+Author: Rabea with help of Masoud B.
 Purpose: Get booking history from customers
 */
 using System;
@@ -13,7 +14,7 @@ using G4TEWS4_MVC.Models.DataManager;
 using G4TEWS4_Data;
 using Microsoft.AspNetCore.Authorization;
 
-namespace TeamLID.TravelExperts.App.Controllers
+namespace G4TEWS4_MVC.Controllers
 {
     
     public class BookingsController : Controller
