@@ -12,6 +12,7 @@
 }
 
 <h1>Customer History</h1>
+<h4>@ViewBag.CustomerName</h4>
 @*@if (message) { 
     <h4 class="text-center mt-120">@message</h4>
     } check
@@ -21,7 +22,7 @@ else
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.BookingDate)
+                    @Html.DisplayNameFor(model => model.Package.PkgStartDate)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.BookingNo)
@@ -44,34 +45,43 @@ else
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BookingDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BookingNo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TravelerCount)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Customer.CustAddress)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Package.PkgName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TripType.TripTypeId)
-                    </td>
-                    <td>
+            <tr>
+                @*<td>
+            @Html.DisplayFor(modelItem => item.BookingDate)
+        </td>*@
 
-                        @{
-                            @foreach (var package in (IEnumerable<PackageSearchModel>)TempData["Packages"])
+                <td>
+                    @String.Format("{0:dd/MMM/yyyy}", item.Package.PkgStartDate)
+                    @*@Html.DisplayFor(modelItem => item.Package.PkgStartDate)*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TravelerCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.CustAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Package.PkgName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TripType.TripTypeId)
+                </td>
+                <td>
+
+
+
+                    @{
+
+                        @foreach (var package in (IEnumerable<PackageSearchModel>)TempData["Packages"])
+                        {
+                            if (package.PackageId == item.PackageId)
+
                             {
-                                if (package.PackageId == item.PackageId)
+                                if (package.PkgStartDate > DateTime.Today)
                                 {
-                                    if (package.PkgStartDate > DateTime.Today)
-                                    {
 
                                     <a asp-action="Edit" asp-controller="bookings" asp-route-id="@item.BookingId" class="btn btn-primary">Edit</a>
 
@@ -87,5 +97,5 @@ else
         }
     </tbody>
 </table>
-@*}*@
+
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,8 @@ namespace G4TEWS4_Data
         [StringLength(50)]
         public string PkgName { get; set; }
         [Column(TypeName = "datetime")]
+
+        [DisplayName("Start Date")]
         public DateTime? PkgStartDate { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? PkgEndDate { get; set; }

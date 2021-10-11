@@ -42,7 +42,7 @@ namespace G4TEWS4_Data.Controllers
                     PkgBasePrice = Convert.ToString(Math.Round((decimal)(pck.PkgBasePrice + pck.PkgAgencyCommission), 0))
                 }).ToList();
 
-            return View(packages);
+            return View(packages.OrderBy(sdt => sdt.PkgStartDate)); // *** Gilmar Castillo: added sorting ***
 
         }
 
